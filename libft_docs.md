@@ -1,82 +1,48 @@
-# LIBFT COMMENTS
+# Libft documentation
 
-## Files comments
 
-- libft.h includes purpose
-    - `<stddef.h>`: This header file defines several useful types and macros. Some of the most important definitions include:
-        - `size_t`: An unsigned integer type used to represent sizes of objects in memory, typically returned by functions like `strlen()` and `sizeof()`.
-        - `NULL` macro
-    - `<unistd.h>`: This header file provides access to various POSIX operating system APIs. Some of the key functions and features include:
-        - `read()`, `write()`, and `close()`: Functions for working with file descriptors.
-        - `sleep()`: A function to suspend the execution of the calling thread for a specified time.
-    - `<stdlib.h>`: This header file provides a wide range of general-purpose functions and macros. Some of the most important features include:
-        - `malloc()`, `calloc()`, `realloc()`, and `free()`: Functions for memory allocation and deallocation.
-- Makefile
-    - General purpose
-        
-        A Makefile is a build configuration file used by the `make` command to automate the build process for a project. It provides a series of rules and dependencies that describe how to build your project, including the compilation of source files, linking libraries, and cleaning up intermediate files.
-        
-        1. **Dependency management**: Tracks dependencies, optimizing build time.
-        2. **Automation**: Streamlines compilation and linking, saving time and reducing errors.
-        3. **Modularity**: Organizes separate rules and targets, simplifying management.
-        4. **Reproducibility**: Ensures a consistent build process across environments.
-        5. **Customization**: Allows easy adjustments to the build process.
-        
-        In summary, the Makefile is a powerful tool that simplifies and automates the build process for your `libft` library, making it easier to manage, maintain, and share your project with others.
-        
-    - target rule
-        
-        In a Makefile, targets usually represent file names, and the rules define how to build those files from other files (dependencies). When you run `make target`, the utility checks the file modification times to decide whether the target file needs to be rebuilt. If the target file is up-to-date (i.e., newer than its dependencies), Make doesn't execute the associated commands.
-        
-        ```makefile
-        target : pre-requisities
-        				 recipe
-        ```
-        
-    - Why cc and not gcc ?
-        
-        Both `cc` and `gcc` are used to compile C programs, but they represent different compilers:
-        
-        1. `cc`: This is a generic name for the system's default C compiler. On many systems, `cc` is a symlink to the actual compiler, such as `gcc`, `clang`, or another compiler. Using `cc` in your Makefile provides flexibility, as it will use the default C compiler on the system where your code is being built. This can be useful if you want to ensure compatibility with multiple compilers or if you are not specifically targeting a particular compiler.
-        2. `gcc`: This is the GNU Compiler Collection's C compiler. If you explicitly use `gcc` in your Makefile, you are specifying that you want to use the GCC compiler to build your project. This can be helpful if your code relies on features specific to GCC or if you want to ensure that everyone working on the project uses the same compiler.
-        
-        Using `cc` in your Makefile is generally recommended for portability, as it allows your code to be built with the default C compiler on the target system. However, if you have specific requirements that depend on a particular compiler (like GCC), you may choose to use that compiler explicitly in your Makefile.
-        
-    - `-Wall -Wextra -Werror -I` : Whats the -I flag ?
-        
-        The `-I` flag in your Makefile is followed by a dot (.), which specifies the current directory as an include directory for the compiler. The purpose of the `-I` flag is to tell the compiler where to look for header files when processing the C source files.
-        
-        In your Makefile, the line `CFLAGS = -Wall -Wextra -Werror -I.` specifies that the compiler should look for header files in the current directory (where the dot represents the current directory). This means that when your source files include a header file (for example, `#include "libft.h"`), the compiler will search for the header in the current directory.
-        
-        In your specific case, since all the header files are located in the same directory as the source files, you could technically remove the `-I.` flag, and the compiler would still be able to find the header files. However, **it's a good practice to keep the `-I` flag, as it explicitly tells the compiler where to look for header files and makes your Makefile more maintainable and portable.**
-        
-        In more complex projects, you might have header files in different directories, and you would use the `-I` flag followed by the path to those directories (e.g., `-I./include`). This way, the compiler knows where to find the header files when building the project.
-        
-    - `ar rcs` command
-        - `ar` : archive command, a Unix 
-        utility used to create, modify, and extract from archives. In this case,
-         it's used to create a static library.
-        - `rcs`: These are options passed to the `ar` command.
-            - `r`: Replace or add the specified files to the archive. If the files don't exist in the archive, they are added; if they do exist, their content is replaced with the new content.
-            - `c`: Create the archive if it doesn't already exist.
-            - `s`: Write an object-file index into the archive, which can speed up linking to the library.
-    - `.PHONNY`
-        
-        `PHONNY` is a special target in a Makefile to prevent from searching for files that have the same name as the rules (for example, a file named "all").
-        
-    - Why Makefile works without this rule?
-    `%.o: %.c
-    $(CC) $(CFLAGS) -c $< -o $@`
-        
-        Instead, the Makefile relies on the built-in implicit rules provided by `make`, similar to the `%.o: %.c` rule I described earlier.
-        
-        However, if you want to customize the rule for building object files, you can add the `%.o: %.c` rule with a custom recipe. This will override the built-in rule, allowing you to add your own flags or other customizations to the build process. If the default behavior is sufficient for your project, there is no need to add these lines.
-        
-        By specifying the pattern rule, you ensure that the compilation process is consistent across different systems.
-        
-    
+## Table of Contents
+
+1. [Functions](#functions)
+   - [memchr](#memchr)
+     - [Why `ptr` is `const`?](#why-ptr-is-const)
+   - [memcpy](#memcpy)
+     - [Why cast to character pointers `(char *)`, doesn't it prevent copying of other types of data? Like numeric values?](#why-cast-to-character-pointers-char-doesnt-it-prevent-copying-of-other-types-of-data-like-numeric-values)
+     - [Why unsigned char and not unsigned int?](#why-unsigned-char-and-not-unsigned-int)
+   - [memmove](#memmove)
+     - [Whats the main difference between memcpy and memmove?](#whats-the-main-difference-between-memcpy-and-memmove)
+     - [`if (s < d && d < s + len)`](#if-s--d--d--s--len)
+   - [strlcpy](#strlcpy)
+     - [`if (dstsize > 0)`](#if-dstsize--0)
+   - [strncmp](#strncmp)
+     - [cast to `(unsigned char)`](#cast-to-unsigned-char)
+   - [strnstr](#strnstr)
+   - [strdup](#strdup)
+     - [`ft_strlen + 1`](#ft_strlen--1)
+   - [atoi](#atoi)
+     - [`sign = 44 - *str++;`](#sign--44---str)
+     - [atoi should handle overflow?](#atoi-should-handle-overflow)
+
+2. [General standards](#general-standards)
+   - [Why to check the `malloc`?](#why-to-check-the-malloc)
+   - [Why do not protect functions?](#why-do-not-protect-functions)
+   - [Can I pass an int variable in `malloc` without casting it to `size_t`?](#can-i-pass-an-int-variable-in-malloc-without-casting-it-to-size_t)
+
+3. [Header & Makefile](#header--makefile)
+   - [libft.h includes purpose](#libft-h-includes-purpose)
+   - [Makefile](#makefile)
+     - [General purpose](#general-purpose)
+     - [target rule](#target-rule)
+     - [Why cc and not gcc?](#why-cc-and-not-gcc)
+     - [`-Wall -Wextra -Werror -I`: What's the -I flag?](#-wall--wextra--werror--i--whats-the--i-flag)
+     - [`ar rcs` command](#ar-rcs-command)
+     - [`.PHONY`](#phony)
+     - [Why Makefile works without this rule?](#why-makefile-works-without-this-rule)
 
 ---
+</br>
+
+## Functions
 
 - memchr
     
@@ -175,11 +141,10 @@
         
 <br />
 <br />
-<br />
 
 ## General standards
 
-- Why check the `malloc`?
+- Why to check the `malloc`?
     
     It is important to check if **`malloc`** worked and returned a valid pointer because **`malloc`** can fail in certain situations, such as:
     
@@ -207,3 +172,82 @@
     
     Yes, you can pass an `int` variable to `malloc()` without explicitly casting it to `size_t`. The C compiler will automatically perform an implicit conversion from `int` to `size_t` when calling the function. However, it's important to note that this could lead to potential issues if the `int` variable has a negative value, as `size_t` is an unsigned type.
     
+<br />
+<br />
+
+## Header & Makefile
+
+- libft.h includes purpose
+    - `<stddef.h>`: This header file defines several useful types and macros. Some of the most important definitions include:
+        - `size_t`: An unsigned integer type used to represent sizes of objects in memory, typically returned by functions like `strlen()` and `sizeof()`.
+        - `NULL` macro
+    - `<unistd.h>`: This header file provides access to various POSIX operating system APIs. Some of the key functions and features include:
+        - `read()`, `write()`, and `close()`: Functions for working with file descriptors.
+        - `sleep()`: A function to suspend the execution of the calling thread for a specified time.
+    - `<stdlib.h>`: This header file provides a wide range of general-purpose functions and macros. Some of the most important features include:
+        - `malloc()`, `calloc()`, `realloc()`, and `free()`: Functions for memory allocation and deallocation.
+- Makefile
+    - General purpose
+        
+        A Makefile is a build configuration file used by the `make` command to automate the build process for a project. It provides a series of rules and dependencies that describe how to build your project, including the compilation of source files, linking libraries, and cleaning up intermediate files.
+        
+        1. **Dependency management**: Tracks dependencies, optimizing build time.
+        2. **Automation**: Streamlines compilation and linking, saving time and reducing errors.
+        3. **Modularity**: Organizes separate rules and targets, simplifying management.
+        4. **Reproducibility**: Ensures a consistent build process across environments.
+        5. **Customization**: Allows easy adjustments to the build process.
+        
+        In summary, the Makefile is a powerful tool that simplifies and automates the build process for your `libft` library, making it easier to manage, maintain, and share your project with others.
+        
+    - target rule
+        
+        In a Makefile, targets usually represent file names, and the rules define how to build those files from other files (dependencies). When you run `make target`, the utility checks the file modification times to decide whether the target file needs to be rebuilt. If the target file is up-to-date (i.e., newer than its dependencies), Make doesn't execute the associated commands.
+        
+        ```makefile
+        target : pre-requisities
+        				 recipe
+        ```
+        
+    - Why cc and not gcc ?
+        
+        Both `cc` and `gcc` are used to compile C programs, but they represent different compilers:
+        
+        1. `cc`: This is a generic name for the system's default C compiler. On many systems, `cc` is a symlink to the actual compiler, such as `gcc`, `clang`, or another compiler. Using `cc` in your Makefile provides flexibility, as it will use the default C compiler on the system where your code is being built. This can be useful if you want to ensure compatibility with multiple compilers or if you are not specifically targeting a particular compiler.
+        2. `gcc`: This is the GNU Compiler Collection's C compiler. If you explicitly use `gcc` in your Makefile, you are specifying that you want to use the GCC compiler to build your project. This can be helpful if your code relies on features specific to GCC or if you want to ensure that everyone working on the project uses the same compiler.
+        
+        Using `cc` in your Makefile is generally recommended for portability, as it allows your code to be built with the default C compiler on the target system. However, if you have specific requirements that depend on a particular compiler (like GCC), you may choose to use that compiler explicitly in your Makefile.
+        
+    - `-Wall -Wextra -Werror -I` : Whats the -I flag ?
+        
+        The `-I` flag in your Makefile is followed by a dot (.), which specifies the current directory as an include directory for the compiler. The purpose of the `-I` flag is to tell the compiler where to look for header files when processing the C source files.
+        
+        In your Makefile, the line `CFLAGS = -Wall -Wextra -Werror -I.` specifies that the compiler should look for header files in the current directory (where the dot represents the current directory). This means that when your source files include a header file (for example, `#include "libft.h"`), the compiler will search for the header in the current directory.
+        
+        In your specific case, since all the header files are located in the same directory as the source files, you could technically remove the `-I.` flag, and the compiler would still be able to find the header files. However, **it's a good practice to keep the `-I` flag, as it explicitly tells the compiler where to look for header files and makes your Makefile more maintainable and portable.**
+        
+        In more complex projects, you might have header files in different directories, and you would use the `-I` flag followed by the path to those directories (e.g., `-I./include`). This way, the compiler knows where to find the header files when building the project.
+        
+    - `ar rcs` command
+        - `ar` : archive command, a Unix 
+        utility used to create, modify, and extract from archives. In this case,
+         it's used to create a static library.
+        - `rcs`: These are options passed to the `ar` command.
+            - `r`: Replace or add the specified files to the archive. If the files don't exist in the archive, they are added; if they do exist, their content is replaced with the new content.
+            - `c`: Create the archive if it doesn't already exist.
+            - `s`: Write an object-file index into the archive, which can speed up linking to the library.
+    - `.PHONNY`
+        
+        `PHONNY` is a special target in a Makefile to prevent from searching for files that have the same name as the rules (for example, a file named "all").
+        
+    - Why Makefile works without this rule?
+		```makefile
+		`%.o: %.c
+		$(CC) $(CFLAGS) -c $< -o $@`
+		```
+
+        
+        Instead, the Makefile relies on the built-in implicit rules provided by `make`, similar to the `%.o: %.c` rule I described earlier.
+        
+        However, if you want to customize the rule for building object files, you can add the `%.o: %.c` rule with a custom recipe. This will override the built-in rule, allowing you to add your own flags or other customizations to the build process. If the default behavior is sufficient for your project, there is no need to add these lines.
+        
+        By specifying the pattern rule, you ensure that the compilation process is consistent across different systems.

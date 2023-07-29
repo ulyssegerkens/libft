@@ -6,7 +6,7 @@
 /*   By: ugerkens <ugerkens@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 23:24:21 by ugerkens          #+#    #+#             */
-/*   Updated: 2023/04/11 18:23:46 by ugerkens         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:03:16 by ugerkens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	count = ft_countwords(s, c);
-	strs = (char **)malloc(sizeof(char *) * (count + 1));
+	strs = malloc(sizeof(char *) * (count + 1));
 	if (!strs)
 		return (NULL);
 	strs[count] = NULL;

@@ -6,7 +6,7 @@
 /*   By: ugerkens <ugerkens@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 23:23:20 by ugerkens          #+#    #+#             */
-/*   Updated: 2023/04/11 14:34:23 by ugerkens         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:03:30 by ugerkens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_itoa(int n)
 	if (n < 0)
 		ncpy = -n;
 	i = int_len(n);
-	str = (char *)malloc(sizeof(char) * (i + 1));
+	str = malloc(sizeof(char) * (i + 1));
 	if (!str)
 		return (NULL);
 	str[i] = '\0';

@@ -6,7 +6,7 @@
 /*   By: ugerkens <ugerkens@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 20:16:33 by ugerkens          #+#    #+#             */
-/*   Updated: 2023/04/05 14:28:10 by ugerkens         ###   ########.fr       */
+/*   Updated: 2023/07/24 00:12:37 by ugerkens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
+	struct s_list	*prev;
 }					t_list;
 
 int					ft_isalpha(int c);
@@ -39,6 +40,7 @@ int					ft_toupper(int c);
 int					ft_tolower(int c);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
+int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);

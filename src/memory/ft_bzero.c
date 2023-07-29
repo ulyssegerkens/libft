@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugerkens <ugerkens@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 15:52:38 by ugerkens          #+#    #+#             */
-/*   Updated: 2023/03/13 20:05:28 by ugerkens         ###   ########.fr       */
+/*   Created: 2023/03/10 23:22:35 by ugerkens          #+#    #+#             */
+/*   Updated: 2023/04/27 14:58:50 by ugerkens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	ft_bzero(void *s, size_t n)
 {
-	new->next = *lst;
-	*lst = new;
+	ft_memset(s, 0, n);
 }
