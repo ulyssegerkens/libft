@@ -19,7 +19,7 @@ Change log:
 - function classified in directories
 - header in a new include/ directory
 - implementation of ft_strcmp
-</br></br>
+</br>
 
 ## 🎉 Testing
 Tested by moulinette (125%) and the following tester, in their strictest version. 
