@@ -6,7 +6,7 @@
 /*   By: ugerkens <ugerkens@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 20:16:33 by ugerkens          #+#    #+#             */
-/*   Updated: 2023/10/18 19:37:59 by ugerkens         ###   ########.fr       */
+/*   Updated: 2023/10/18 19:48:02 by ugerkens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
-ssize_t				ft_write_fd(int fd, char *s);
+ssize_t				ft_write_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 

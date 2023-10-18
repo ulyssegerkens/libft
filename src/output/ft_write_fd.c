@@ -6,13 +6,13 @@
 /*   By: ugerkens <ugerkens@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:25:35 by ugerkens          #+#    #+#             */
-/*   Updated: 2023/10/18 19:38:39 by ugerkens         ###   ########.fr       */
+/*   Updated: 2023/10/18 19:48:10 by ugerkens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-ssize_t	ft_write_fd(int fd, char *s)
+ssize_t	ft_write_fd(char *s, int fd)
 {
 	if (!s)
 		return (-1);
