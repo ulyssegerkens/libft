@@ -19,6 +19,7 @@ Change log:
 - function classified in directories
 - header in a new include/ directory
 - implementation of ft_strcmp
+- implementation of ft_write_fd (as ft_putstr_fd, but return the write return)
 </br>
 
 ## 📋 Testing
