@@ -15,11 +15,12 @@ This repo is an extended version my libft.</br>
 The original project is stored in the .tar archive.
 
 Change log:
-- Makefile create obj/ directory
-- function classified in directories
-- header in a new include/ directory
-- implementation of ft_strcmp
-- implementation of ft_write_fd (as ft_putstr_fd, but return the write return)
+- Makefile create obj/ directory.
+- Function classified in directories.
+- Header in a new include/ directory.
+- Implementation of `ft_strcmp`.
+- Implementation of `ft_write_fd` (as `ft_putstr_fd`, but return the write syscall return).
+- Modification of `ft_lstclear` and `ft_lstdelone` to accept a `NULL` pointer as delete function. Useful to delete the structure list without it's content. Use with caution, if the content of the list has not been kept somewhere, it may lead to leaks!
 </br>
 
 ## 📋 Testing

@@ -6,7 +6,7 @@
 /*   By: ugerkens <ugerkens@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:59 by ugerkens          #+#    #+#             */
-/*   Updated: 2023/04/11 15:46:48 by ugerkens         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:27:42 by ugerkens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*buffer;
 
-	if (!lst || !*lst || !del)
+	if (!lst || !*lst)
 		return ;
 	while (*lst)
 	{
