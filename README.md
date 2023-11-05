@@ -16,7 +16,7 @@ The original project is stored in the .tar archive.
 
 Change log:
 - Makefile create obj/ directory.
-- Function classified in directories.
+- Functions classified in directories.
 - Header in a new include/ directory.
 - Implementation of `ft_strcmp`.
 - Implementation of `ft_write_fd` (as `ft_putstr_fd`, but return the write syscall return).
