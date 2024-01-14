@@ -22,6 +22,7 @@ Change log:
 - Implementation of `ft_write_fd` (as `ft_putstr_fd`, but return the write syscall return).
 - Now, linked lists are doubly linked. Nodes have a 'prev' pointer in addition to 'next'.
 - Modification of `ft_lstclear` and `ft_lstdelone` to accept a `NULL` pointer as delete function. Useful to delete the structure list without it's content. Use with caution, if the content of the list has not been kept somewhere, it may lead to leaks!
+- `ft_lstclear` set the `lst` pointer to `NULL` to avoid dangling pointer.
 </br>
 
 ## 📋 Testing
