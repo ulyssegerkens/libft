@@ -6,7 +6,7 @@
 #    By: ugerkens <ugerkens@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 20:09:26 by ugerkens          #+#    #+#              #
-#    Updated: 2023/10/18 19:41:01 by ugerkens         ###   ########.fr        #
+#    Updated: 2024/01/17 14:05:58 by ugerkens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS			=	ft_atoi.c ft_itoa.c ft_tolower.c ft_toupper.c \
 					ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c \
 					ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c
 							
-OBJS			=	$(addprefix obj/,$(SRCS:.c=.o))
+OBJS			=	$(addprefix build/,$(SRCS:.c=.o))
 
 # Rules
 $(NAME):		$(OBJS)
@@ -36,15 +36,15 @@ $(NAME):		$(OBJS)
 
 all:			$(NAME)
 
-obj:
-				mkdir -p obj
+build:
+				mkdir -p build
 
-obj/%.o:		%.c | obj
+build/%.o:		%.c | build
 				mkdir -p $(dir $@)
 				$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-				$(RM) obj
+				$(RM) build
 
 fclean:			clean
 				$(RM) $(NAME)
