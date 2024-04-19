@@ -1,6 +1,9 @@
 <h1 align="center">
-	Libft
+	A Simple Libft
 </h1>
+<p align="center">
+	This project helped you? Give it a 🌟!
+</p>
 
 ## 🧰 General information
 Version: 15. Bonus included.</br>
